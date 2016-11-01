@@ -92,13 +92,20 @@ Your `~/.vimrc.local` might look like this:
 If you don't wish to install a vim plugin from the default set of vim plugins in
 `.vimrc.bundles`, you can ignore the plugin by calling it out with `UnPlug` in
 your `~/.vimrc.bundles.local`.
-blacklist in `~/.vimrc.ignorebundles`:
 
     " Don't install vim-scripts/tComment
     UnPlug 'tComment'
 
 `UnPlug` can be used to install your own fork of a plugin or to install a shared
 plugin with different custom options.
+
+    " Only load vim-coffee-script if a Coffeescript buffer is created
+    UnPlug 'vim-coffee-script'
+    Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+
+    " Use a personal fork of vim-run-interactive
+    UnPlug 'vim-run-interactive'
+    Plug '$HOME/plugins/vim-run-interactive'
 
 To extend your `git` hooks, create executable scripts in
 `~/.git_template.local/hooks/*` files.

@@ -4,8 +4,15 @@ end
 
 " Remove declared plugins
 function! s:UnPlug(plug_name)
-  if has_key(g:plugs, a:plug_name)
-    call remove(g:plugs, a:plug_name)
+  if match(a:plug_name, '\/') > 0
+		echom "UnPlug expects a repository name without an author. ('ctrlp.vim', not 'ctrlpvim/ctrlp.vim). You specified ".a:plug_name."."
+    let l:plug_name_without_author = split(a:plug_name, '/')[1]
+  else
+    let l:plug_name_without_author = a:plug_name
+  endif
+
+  if has_key(g:plugs, l:plug_name_without_author)
+    call remove(g:plugs, l:plug_name_without_author)
   endif
 endfunction
 command!  -nargs=1 UnPlug call s:UnPlug(<args>)

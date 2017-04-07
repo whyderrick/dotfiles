@@ -97,9 +97,11 @@ your `~/.vimrc.bundles.local`.
     UnPlug 'tComment'
 
 `UnPlug` can be used to install your own fork of a plugin or to install a shared
-plugin with different custom options.
+plugin with different custom options. Call `UnPlug` with the plugin name (with
+no author):
 
     " Only load vim-coffee-script if a Coffeescript buffer is created
+    " Note that only the repository name is specified to unplug
     UnPlug 'vim-coffee-script'
     Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 

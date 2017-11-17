@@ -2,6 +2,8 @@ autoload -U promptinit; promptinit
 prompt pure
 
 PATH=".git/safe/../../bin:$PATH"
+PATH="$PATH:`yarn global bin`"
+PATH=".git/safe/../../bin:$PATH"
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 export PATH
 

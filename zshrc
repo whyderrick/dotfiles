@@ -39,3 +39,6 @@ _load_settings "$HOME/.zsh/configs"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

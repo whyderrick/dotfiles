@@ -19,3 +19,4 @@ tmp/**/*
 !tmp/cache/.keep
 *.pyc
 .tool-versions
+scratch.md

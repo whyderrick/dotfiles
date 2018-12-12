@@ -42,3 +42,9 @@ _load_settings "$HOME/.zsh/configs"
 
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+. /usr/local/etc/profile.d/z.sh
+
+. $HOME/.asdf/asdf.sh
+
+. $HOME/.asdf/completions/asdf.bash

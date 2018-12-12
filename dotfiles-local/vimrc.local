@@ -39,3 +39,5 @@ nnoremap <Leader>.te :sp $MYTMUXCONF<CR>
 nnoremap <Leader>.tr :!source $MYTMUXCONF<CR>
 " Remove highlight from searching
 nnoremap <Leader>h :nohl<CR>
+" Open NerdTREE with  Ctrl + N
+map <C-n> :NERDTreeToggle<CR>

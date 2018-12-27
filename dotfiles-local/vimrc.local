@@ -45,3 +45,6 @@ nnoremap <Leader>.tr :!source $MYTMUXCONF<CR>
 nnoremap <Leader>h :nohl<CR>
 " Open NerdTREE with  Ctrl + N
 map <C-n> :NERDTreeToggle<CR>
+
+" Make ALE tell which linter a message is coming from
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'

@@ -13,7 +13,6 @@ nnoremap <silent> <Leader>ts :TestSuite<CR>
 nnoremap <silent> <Leader>gs :TestVisit<CR>
 nnoremap <silent> <Leader>S :TestSuite<CR>
 
-
 colorscheme solarized
 set bg=light
 

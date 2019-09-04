@@ -47,3 +47,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Make ALE tell which linter a message is coming from
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+" Make fzf take up less of the total screen
+let g:fzf_layout = {'down': '20%'}

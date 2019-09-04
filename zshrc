@@ -48,3 +48,5 @@ _load_settings "$HOME/.zsh/configs"
 . $HOME/.asdf/asdf.sh
 
 . $HOME/.asdf/completions/asdf.bash
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

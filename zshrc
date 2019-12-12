@@ -50,3 +50,5 @@ _load_settings "$HOME/.zsh/configs"
 . $HOME/.asdf/completions/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+. /usr/local/Cellar/asdf/0.7.4/asdf.sh

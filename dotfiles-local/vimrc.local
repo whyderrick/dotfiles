@@ -50,3 +50,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " Make fzf take up less of the total screen
 let g:fzf_layout = {'down': '20%'}
+
+" Read local vimrc files if they exist in a project directory
+if filereadable(".git/safe/../../.vimrc.local")
+  source .git/safe/../../.vimrc.local
+endif

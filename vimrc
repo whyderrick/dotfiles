@@ -15,6 +15,7 @@ set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 set modelines=0   " Disable modelines as a security precaution
 set nomodeline
+set relativenumber
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -155,8 +156,14 @@ nnoremap <C-l> <C-w>l
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
+" Make ALE tell which linter a message is coming from
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
+
+" Make fzf take up less of the total screen
+let g:fzf_layout = {'down': '20%'}
 
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
@@ -168,7 +175,51 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
+"Vim test mappings
+nnoremap <Leader>tf :TestFile<CR>
+nnoremap <Leader>t :TestNearest<CR>
+nnoremap <silent> <Leader>l :TestLast<CR>
+nnoremap <silent> <Leader>ts :TestSuite<CR>
+nnoremap <silent> <Leader>gs :TestVisit<CR>
+nnoremap <silent> <Leader>S :TestSuite<CR>
+
+" Vim color theming
+set bg=light
+colorscheme solarized
+
+"" Incremental search with highlighted results
+set incsearch
+set hlsearch
+set smartcase
+set ignorecase
+
+" Enable clipboard
+set clipboard=unnamed
+
+" Fold code by indentation
+set foldmethod=indent
+
+" Open vimrc in a split
+nnoremap <Leader>.ve :sp $MYVIMRC<CR>
+" Reload/re-source vimrc in current buffer
+nnoremap <Leader>.vr :source $MYVIMRC<CR>
+" Open tmux-conf in a split
+nnoremap <Leader>.te :sp $MYTMUXCONF<CR>
+" Reload/re-source tmux-conf
+nnoremap <Leader>.tr :!source $MYTMUXCONF<CR>
+
+" Remove highlight from searching
+nnoremap <Leader>h :nohl<CR>
+
+" Open NerdTREE with  Ctrl + N
+map <C-n> :NERDTreeToggle<CR>
+
 " Local config
 if filereadable($HOME . "/.vimrc.local")
   source ~/.vimrc.local
+endif
+
+" Read repo specific vimrc files if they exist in a project directory
+if filereadable(".git/safe/../../.vimrc.local")
+  source .git/safe/../../.vimrc.local
 endif

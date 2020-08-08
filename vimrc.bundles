@@ -56,6 +56,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 
+" Colorschemes
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'lifepillar/vim-solarized8'
+
 if g:has_async
   Plug 'dense-analysis/ale'
 endif

@@ -185,7 +185,8 @@ nnoremap <silent> <Leader>S :TestSuite<CR>
 
 " Vim color theming
 set bg=light
-colorscheme solarized
+colorscheme onehalflight
+let g:airline_theme='onehalfdark'
 
 "" Incremental search with highlighted results
 set incsearch

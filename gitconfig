@@ -12,6 +12,8 @@
   co = checkout
   pf = push --force-with-lease
   st = status
+  l = log --pretty=colored
+  names = --name-only
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
@@ -21,6 +23,8 @@
   template = ~/.gitmessage
 [fetch]
   prune = true
+[pretty]
+  colored = format:%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset
 [rebase]
   autosquash = true
 [include]

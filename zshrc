@@ -50,3 +50,18 @@ _load_settings "$HOME/.zsh/configs"
 . $HOME/.asdf/completions/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+autoload -U promptinit; promptinit
+prompt pure
+
+PATH=".git/safe/../../bin:$PATH"
+PATH="$PATH:`yarn global bin`"
+PATH=".git/safe/../../bin:$PATH"
+PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+export PATH
+
+. /usr/local/Cellar/z/1.9/etc/profile.d/z.sh
+
+bindkey -v
+autoload -U compinit && compinit

@@ -4,7 +4,7 @@ Derrick's dotfiles
 These are my dotfiles, seeded from the wonderfully helpful [thoughtbot
 dotfiles](https://github.com/thoughtbot/dotfiles).
 
-I program on Macs, in Vim, with zsh as my shell and a helpful assist from TMUX.
+I program on Macs, in Vim, with fish as my shell and a helpful assist from TMUX.
 If you like those tools, there might be something here for you. If not, there
 probably isn't, but thank you for stopping by. Below is info for using the
 thoughtbot dotfiles (or these) alongside
@@ -18,9 +18,9 @@ comments should mostly detail what I gain from something here.
 Requirements
 ------------
 
-Set zsh as your login shell:
+Set fish as your login shell:
 
-    chsh -s $(which zsh)
+    chsh -s $(which fish)
 
 Install
 -------

@@ -1,3 +1,9 @@
+# Load any machine local config at config.fish.local
+if test -e $HOME/.config/fish/config.fish.local
+  source $HOME/.config/fish/config.fish.local
+end
+
+
 set fish_vi_key_bindings
 
 set -x EDITOR vim
@@ -14,6 +20,3 @@ abbr --add g git
 abbr --add v $VISUAL
 abbr --add b bundle
 abbr --add be bundle exec
-# THEME PURE #
-set fish_function_path /Users/derrickcarr/.config/fish/functions/theme-pure/functions/ $fish_function_path
-source /Users/derrickcarr/.config/fish/functions/theme-pure/conf.d/pure.fish

@@ -7,6 +7,7 @@ function tat
     tmux new-session -As $session_name -n code -d
     tmux new-window -t $session_name -n server
     tmux new-window -t $session_name -n console
+    tmux new-window -t $session_name -n specs
     tmux select-window -t $session_name -n
     tmux attach -t $session_name
   else

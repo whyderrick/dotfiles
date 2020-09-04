@@ -6,11 +6,11 @@ set -x VISUAL vim
 
 source $HOME/.config/fish/functions/addpaths.fish
 
-addpaths fish_user_paths "$HOME/.bin" $fish_user_paths
-addpaths fish_user_paths "$HOME/.asdf/bin" $fish_user_paths
-addpaths fish_user_paths "$HOME/.asdf/shims" $fish_user_paths
-addpaths fish_user_paths ".git/safe/../../bin" $fish_user_paths
-addpaths fish_user_paths "/usr/local/sbin" $fish_user_paths
+addpaths "$HOME/.bin"
+addpaths "$HOME/.asdf/bin"
+addpaths "$HOME/.asdf/shims"
+addpaths ".git/safe/../../bin"
+addpaths "/usr/local/sbin"
 
 abbr --add g git
 abbr --add v $VISUAL

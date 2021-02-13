@@ -21,3 +21,6 @@ abbr --add be bundle exec
 if test -e $HOME/.config/fish/config.fish.local
   source $HOME/.config/fish/config.fish.local
 end
+# THEME PURE #
+set fish_function_path /Users/derrick/.config/fish/functions/theme-pure/functions/ $fish_function_path
+source /Users/derrick/.config/fish/functions/theme-pure/conf.d/pure.fish

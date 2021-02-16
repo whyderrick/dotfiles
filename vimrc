@@ -71,6 +71,12 @@ augroup ale
   endif
 augroup END
 
+let g:ale_fixers = {
+\  'ruby': [
+\   'rubocop'
+\  ]
+\}
+
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
 let g:is_posix = 1
@@ -224,3 +230,14 @@ endif
 if filereadable(".git/safe/../../.vimrc.local")
   source .git/safe/../../.vimrc.local
 endif
+
+" COC tweaks that I need to better understand
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()

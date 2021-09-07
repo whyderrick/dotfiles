@@ -41,3 +41,7 @@
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
   required = true
+[pull]
+	ff = only
+[url "git@github.com:"]
+	insteadOf = https://github.com/

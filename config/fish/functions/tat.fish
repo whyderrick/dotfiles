@@ -1,7 +1,7 @@
 function tat
   set parent (basename (dirname $PWD))
   set child (basename $PWD | tr . -)
-  set session_name $parent/$child
+  set session_name $child
 
   if test -z $TMUX
     tmux new-session -As $session_name -n code -d
@@ -11,7 +11,7 @@ function tat
     tmux select-window -t $session_name -n
     tmux attach -t $session_name
   else
-    set session exists (tmux list-sessions | sed -E 's/:.*$//' | grep -q ^$session_name$)
+    set session exists (tmux list-sessions | sed -E 's/:.*$//' | grep -q ^$session_name\Z)
     if not session_exists
       eval TMUX='' tmux new-session -Ad -s $session_name
     end

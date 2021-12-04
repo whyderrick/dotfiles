@@ -168,8 +168,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " Map Ctrl + p to open fuzzy find (FZF)
 nnoremap <c-p> :Files<cr>
 
-" Make fzf take up less of the total screen
-let g:fzf_layout = {'down': '20%'}
+" Make fzf open in a pop-up overlay
+let g:fzf_layout = {'window': { 'width': 0.8, 'height': 0.6 }}
 
 " Set spellfile to location that is guaranteed to exist, can be symlinked to
 " Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.

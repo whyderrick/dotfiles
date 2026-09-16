@@ -83,8 +83,16 @@
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-hook 'web-mode-hook
           (lambda ()
-           (when (string-equal "tsx" (file-name-extension buffer-file-name))
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 ;; enable typescript-tslint checker
 (after! (:and flycheck tide)
-        (flycheck-add-mode 'typescript-tslint 'web-mode))
+  (flycheck-add-mode 'typescript-tslint 'web-mode))
+
+(add-hook 'before-save-hook #'gofmt-before-save)
+
+;; make fish work as expected
+(setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
+

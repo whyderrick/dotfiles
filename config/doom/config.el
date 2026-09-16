@@ -5,38 +5,58 @@
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets.
+;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Derrick Carr"
       user-mail-address "whyderrick@gmail.com")
 
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
+;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;; - `doom-font' -- the primary font to use
+;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
+;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
 ;;   presentations or streaming.
+;; - `doom-symbol-font' -- for symbols
+;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
+;; See 'C-h v doom-font' for documentation and more examples of what they
+;; accept. For example:
+;;
+(setq doom-font (font-spec :family "Monaspace Argon" :size 14 :weight 'regular)
+      doom-variable-pitch-font (font-spec :family "Monaspace Radon Var" :size 16))
+;;
+;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
+;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+;; refresh your font settings. If Emacs still can't find your font, it likely
+;; wasn't installed correctly. Font issues are rarely Doom issues!
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one-light)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Sync/jounal/")
-
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/Sync/jounal/")
 
-;; Here are some additional functions/macros that could help you configure Doom:
+
+;; Whenever you reconfigure a package, make sure to wrap your config in an
+;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
+;;
+;;   (after! PACKAGE
+;;     (setq x y))
+;;
+;; The exceptions to this rule:
+;;
+;;   - Setting file/directory variables (like `org-directory')
+;;   - Setting variables which explicitly tell you to set them before their
+;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
+;;   - Setting doom variables (which start with 'doom-' or '+').
+;;
+;; Here are some additional functions/macros that will help you configure Doom.
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package!' for configuring packages
@@ -49,13 +69,15 @@
 ;; To get information about any of these functions/macros, move the cursor over
 ;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
 ;; This will open documentation for it, including demos of how they are used.
+;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
+;; etc).
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;; I don't want evil-snipe-mode, but I do want its incremental highlighting of
-;; of matches within a link
-(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+(setq shell-file-name (executable-find "bash"))
+(setq-default vterm-shell (executable-find "fish"))
+(setq-default explicit-shell-file-name (executable-find "fish"))
 
 ;; Configure Tide (Typescript IDE)
 (defun setup-tide-mode ()
@@ -73,26 +95,24 @@
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
 
-;; formats the buffer before saving
-(add-hook 'before-save-hook 'tide-format-before-save)
+;; Explicitly require this as a temp workaround for this issue with the terraform lsp package
+;; https://github.com/emacs-lsp/lsp-mode/issues/3577
+(require 'lsp-mode)
 
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+(after! lsp-mode
+  (add-hook 'typescript-ts-mode-hook #'lsp-deferred)
+  (add-hook 'tsx-ts-mode-hook #'lsp-deferred)
+  (add-hook 'js-ts-mode-hook #'lsp-deferred))
 
-;; Enable Tide for tsx files
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
-;; enable typescript-tslint checker
-(after! (:and flycheck tide)
-  (flycheck-add-mode 'typescript-tslint 'web-mode))
+;; (use-package lsp-mode
+;;   :hook ((typescript-mode . lsp)
+;;          (typescript-ts-mode . lsp)
+;;          (tsx-ts-mode . lsp))
+;;   :commands lsp)
 
-(add-hook 'before-save-hook #'gofmt-before-save)
-
-;; make fish work as expected
-(setq shell-file-name (executable-find "bash"))
-(setq-default vterm-shell (executable-find "fish"))
-(setq-default explicit-shell-file-name (executable-find "fish"))
-
+;; Create new file in dired subdirectory
+(setq dired-create-empty-file-in-current-directory t)
+(map!
+ :map dired-mode-map
+ :localleader
+ "n" #'dired-create-empty-file)
